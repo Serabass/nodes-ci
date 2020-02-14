@@ -1,4 +1,4 @@
-import {LGraphNode, LiteGraph} from 'litegraph.js';
+import {LGraphNode} from 'litegraph.js';
 import {LiteGraphNode} from '../decorators/LiteGraphNode.ts';
 
 @LiteGraphNode('CI/bash')

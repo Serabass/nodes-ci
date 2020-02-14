@@ -2,19 +2,45 @@
 
 @section('content')
 
-    <section class="row p-2">
-        <div class="col-md-6">{{ $job->id }}</div>
-        <div class="col-md-6">{{ $job->title }}</div>
-    </section>
+    <form action="{{route('job.save', ['id' => $job->id])}}" method="POST" id="jobForm">
+        <div class="form-group">
+            <h1>Job <b>{{ $job->id }}</b></h1>
+            <hr>
+        </div>
+        <div class="form-group">
+            <label for="inputTitle">Title</label>
 
-    <section class="row p-2">
-        <div class="col-md-12">
+            <input type="text"
+                   class="form-control"
+                   id="inputTitle"
+                   name="title"
+                   aria-describedby="titleHelp"
+                   placeholder="Enter title"
+                   value="{{ $job->title }}">
+
+            <small id="titleHelp" class="form-text text-muted">A title of your job.</small>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="enabled">
+            <label class="form-check-label" for="enabled">Enabled</label>
+        </div>
+        <div class="form-group form-check">
             @dump($job)
         </div>
-    </section>
-
-    <section class="row p-2">
-        <canvas id='mycanvas' width='1524' height='500' style='border: 1px solid'></canvas>
-    </section>
-
+        <div class="form-group form-check">
+            <canvas
+                id='mycanvas'
+                width='1400'
+                height='500'
+                style='border: 1px solid'
+            ></canvas>
+        </div>
+        <div class="form-group form-check">
+            <input type="hidden" id="json_data" name="json_data" />
+            <div id="json_data_div" hidden>{{ $job->json_data }}</div>
+        </div>
+        <div class="form-group form-check">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
 @endsection

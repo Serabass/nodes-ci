@@ -19,6 +19,11 @@ class NodeJob
      */
     public $nodes = [];
 
+    public $json_data;
+
+    /**
+     * @return NodeJob[]
+     */
     public static function all()
     {
         $result = [];
@@ -34,12 +39,20 @@ class NodeJob
         return $result;
     }
 
+    /**
+     * @param $file
+     * @return NodeJob
+     */
     public static function read($file)
     {
         $contents = file_get_contents(base_path() . '/' . $file);
         return unserialize($contents);
     }
 
+    /**
+     * @param $id
+     * @return NodeJob
+     */
     public static function readById($id)
     {
         return self::read(Common::JOBS_ROOT . '/' . $id . '.job');
@@ -67,7 +80,7 @@ class NodeJob
 
     public function getFileName()
     {
-        return Common::JOBS_ROOT . '/' . $this->id . '.job';
+        return base_path() . '/' . Common::JOBS_ROOT . '/' . $this->id . '.job';
     }
 
     public function getWorkRoot()

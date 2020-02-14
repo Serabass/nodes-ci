@@ -19,3 +19,8 @@ $router->get('/job/{id}',[
     'as' => 'job.index',
     'uses' => 'JobController@index'
 ]);
+
+$router->post('/job/{id}',[
+    'as' => 'job.save',
+    'uses' => 'JobController@save'
+]);
