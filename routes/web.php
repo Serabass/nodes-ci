@@ -11,4 +11,11 @@
 |
 */
 
-$router->get('/', 'MainController@index');
+$router->get('/', [
+    'as' => 'home',
+    'uses' => 'MainController@index'
+]);
+$router->get('/job/{id}',[
+    'as' => 'job.index',
+    'uses' => 'JobController@index'
+]);

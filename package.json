@@ -4,6 +4,7 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
+        "a": "php artisan",
         "serve": "php -S localhost:8000 -t public",
         "watch:local": "webpack --config webpack.dev.js --watch",
         "build:prod": "webpack --config webpack.prod.js"
@@ -18,6 +19,7 @@
         "node-sass": "^4.13.1",
         "popper.js": "^1.16.1",
         "postcss-loader": "^3.0.0",
+        "rpd": "^3.0.0-beta.2",
         "sass-loader": "^8.0.2",
         "style-loader": "^1.1.3",
         "ts-loader": "^6.2.1",

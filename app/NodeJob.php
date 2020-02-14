@@ -4,7 +4,7 @@ namespace App;
 
 class NodeJob
 {
-    const JOBS_ROOT = '../_jobs';
+    const JOBS_ROOT = '_jobs';
 
     /**
      * @var string
@@ -25,7 +25,7 @@ class NodeJob
     public static function all()
     {
         $result = [];
-        $d = dir(self::JOBS_ROOT);
+        $d = dir(base_path() . '/' . self::JOBS_ROOT);
 
         while (false !== ($entry = $d->read())) {
             if ($entry == '.' || $entry == '..')
@@ -39,8 +39,13 @@ class NodeJob
 
     public static function read($file)
     {
-        $contents = file_get_contents($file);
+        $contents = file_get_contents(base_path() . '/' . $file);
         return unserialize($contents);
+    }
+
+    public static function readById($id)
+    {
+        return self::read(self::JOBS_ROOT . '/' . $id . '.job');
     }
 
     public function __construct($id = NULL)
@@ -54,8 +59,16 @@ class NodeJob
 
     public function save()
     {
-        $filename = self::JOBS_ROOT . '/' . $this->id . '.job';
         $serialized = serialize($this);
-        file_put_contents($filename, $serialized);
+        file_put_contents($this->getFileName(), $serialized);
+    }
+
+    public function remove()
+    {
+        unlink($this->getFileName());
+    }
+
+    public function getFileName() {
+        return self::JOBS_ROOT . '/' . $this->id . '.job';
     }
 }

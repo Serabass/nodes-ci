@@ -1,0 +1,3 @@
+O:11:"App\NodeJob":3:{s:2:"id";s:32:"87aa453516b8ffc55c1f5295b38e4224";s:5:"title";s:27:"Necessitatibus ut ut nobis.";s:3:"cli";s:35:"yarn
+php artisan migrate
+yarn build";}
