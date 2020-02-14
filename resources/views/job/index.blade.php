@@ -14,6 +14,7 @@
     </section>
 
     <section class="row p-2">
-
+        <canvas id='mycanvas' width='1524' height='500' style='border: 1px solid'></canvas>
     </section>
+
 @endsection
