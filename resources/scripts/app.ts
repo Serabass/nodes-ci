@@ -61,7 +61,7 @@ function defaults(graph: LGraph) {
     notify.pos = [900, 400];
     graph.add(notify);
 
-    bash.connect(1, notify, 1);
+    bash.connect(1, notify, 0);
 
     let print = LiteGraph.createNode("CI/print");
     print.pos = [1000, 150];

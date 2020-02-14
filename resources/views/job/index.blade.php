@@ -21,11 +21,11 @@
             <small id="titleHelp" class="form-text text-muted">A title of your job.</small>
         </div>
         <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="enabled">
+            <input type="checkbox" class="form-check-input" id="enabled" name="enabled" value="1">
             <label class="form-check-label" for="enabled">Enabled</label>
         </div>
         <div class="form-group form-check">
-            @dump($job)
+            {{--@dump($job)--}}
         </div>
         <div class="form-group form-check">
             <canvas

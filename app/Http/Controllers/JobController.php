@@ -9,8 +9,6 @@ class JobController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @param null $id
      */
     public function __construct()
     {
@@ -26,6 +24,7 @@ class JobController extends Controller
 
     public function save($id, Request $request)
     {
+        dd($request->all());
         $job = NodeJob::readById($id);
         $title = $request->get('title', $job->title);
         $json_data = $request->get('json_data', $job->json_data);
