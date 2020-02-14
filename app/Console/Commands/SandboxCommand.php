@@ -3,7 +3,11 @@
 namespace App\Console\Commands;
 
 use App\NodeJob;
-use App\User;
+
+use App\Nodes\Bash;
+use App\Nodes\Git;
+use App\Nodes\Notify;
+
 use Faker\Factory;
 use Illuminate\Console\Command;
 
@@ -13,53 +17,90 @@ use Illuminate\Console\Command;
  */
 class SandboxCommand extends Command
 {
-  /**
-   * The name and signature of the console command.
-   *
-   * @var string
-   */
-  protected $signature = 's';
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 's';
 
-  /**
-   * The console command description.
-   *
-   * @var string
-   */
-  protected $description = 'Run sandbox command';
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Run sandbox command';
 
-  /**
-   * Create a new command instance.
-   *
-   * @return void
-   */
-  public function __construct()
-  {
-    parent::__construct();
-  }
+    protected $nodeClasses = [
+        Git::class,
+        Bash::class,
+        Notify::class,
+    ];
 
-  /**
-   * Execute the console command.
-   */
-  public function handle()
-  {
-      $faker = Factory::create();
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-      foreach (NodeJob::all() as $job) {
-          $job->remove();
-      }
+    /**
+     * Execute the console command.
+     */
+    public function handle()
+    {
+        $faker = Factory::create();
 
-      $cli = [
-          'yarn',
-          'yarn build',
-          'php artisan migrate',
-      ];
+        foreach (NodeJob::all() as $job) {
+            $job->remove();
+        }
 
-      for ($i = 0; $i < 10; $i++) {
-          $job = new NodeJob();
-          $job->title = $faker->text(40);
-          shuffle($cli);
-          $job->cli = join("\n", $cli);
-          $job->save();
-      }
-  }
+        $cli = [
+            'yarn',
+            'yarn build',
+            'php artisan migrate',
+        ];
+
+        for ($i = 0; $i < 7; $i++) {
+            $id = str_replace('.', '', $faker->userName);
+            $job = new NodeJob($id);
+            $job->title = $faker->text(40);
+            shuffle($cli);
+            $nodesCount = $faker->numberBetween(6, 15);
+            for ($i2 = 0; $i2 < $nodesCount; $i2++) {
+                $class = $faker->randomElement($this->nodeClasses);
+
+                $node = new $class();
+
+                switch ($class) {
+                    case Git::class:
+                        /**
+                         * @var $node Git
+                         */
+                        $node->setInput('repo_url', $faker->url);
+                        break;
+
+                    case Bash::class:
+                        /**
+                         * @var $node Bash
+                         */
+
+                        $cli = [];
+
+                        for ($i3 = 0; $i3 < $faker->numberBetween(3, 7); $i3++) {
+                            $cli[] = $faker->userName;
+                        }
+
+                        $node->setInput('cli', $cli);
+                        break;
+                }
+
+                $job->nodes[] = $node;
+            }
+            $job->save();
+        }
+    }
 }

@@ -4,8 +4,6 @@ namespace App;
 
 class NodeJob
 {
-    const JOBS_ROOT = '_jobs';
-
     /**
      * @var string
      */
@@ -16,22 +14,21 @@ class NodeJob
      */
     public $title;
 
-
     /**
-     * @var string
+     * @var NodeJob[]
      */
-    public $cli;
+    public $nodes = [];
 
     public static function all()
     {
         $result = [];
-        $d = dir(base_path() . '/' . self::JOBS_ROOT);
+        $d = dir(base_path() . '/' . Common::JOBS_ROOT);
 
         while (false !== ($entry = $d->read())) {
             if ($entry == '.' || $entry == '..')
                 continue;
 
-            $result[] = self::read(self::JOBS_ROOT . '/' . $entry);
+            $result[] = self::read(Common::JOBS_ROOT . '/' . $entry);
         }
 
         return $result;
@@ -45,7 +42,7 @@ class NodeJob
 
     public static function readById($id)
     {
-        return self::read(self::JOBS_ROOT . '/' . $id . '.job');
+        return self::read(Common::JOBS_ROOT . '/' . $id . '.job');
     }
 
     public function __construct($id = NULL)
@@ -68,7 +65,13 @@ class NodeJob
         unlink($this->getFileName());
     }
 
-    public function getFileName() {
-        return self::JOBS_ROOT . '/' . $this->id . '.job';
+    public function getFileName()
+    {
+        return Common::JOBS_ROOT . '/' . $this->id . '.job';
+    }
+
+    public function getWorkRoot()
+    {
+        return Common::JOBS_WORKROOT . '/' . $this->id . '.job';
     }
 }

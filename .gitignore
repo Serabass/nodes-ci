@@ -1,10 +1,11 @@
 /vendor
 /.idea
+/_jobs
 Homestead.json
 Homestead.yaml
 .env
 .phpunit.result.cache
 
-public/dist
+/public/dist
 
-node_modules
+/node_modules

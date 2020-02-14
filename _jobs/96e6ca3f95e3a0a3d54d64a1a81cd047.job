@@ -1,3 +1,0 @@
-O:11:"App\NodeJob":3:{s:2:"id";s:32:"96e6ca3f95e3a0a3d54d64a1a81cd047";s:5:"title";s:39:"Non sint molestiae enim enim iure odio.";s:3:"cli";s:35:"yarn
-yarn build
-php artisan migrate";}

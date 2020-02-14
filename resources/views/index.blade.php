@@ -22,7 +22,7 @@
                     {{ $job->title }}
                 </td>
                 <td>
-                    <pre>{{ $job->cli }}</pre>
+                    <pre>{{--{{ /*count($job->nodes || [])*/ }}--}}</pre>
                 </td>
             </tr>
         @endforeach

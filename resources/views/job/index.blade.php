@@ -8,10 +8,12 @@
     </section>
 
     <section class="row p-2">
-        <textarea name="cli" class="form-control">{{ $job->cli }}</textarea>
+        <div class="col-md-12">
+            @dump($job)
+        </div>
     </section>
 
     <section class="row p-2">
-        {{ $job->id }}
+
     </section>
 @endsection

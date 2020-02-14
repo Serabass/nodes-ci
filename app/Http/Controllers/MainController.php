@@ -9,7 +9,6 @@ class MainController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param null $id
      */
     public function __construct()
     {
