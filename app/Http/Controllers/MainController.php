@@ -15,14 +15,11 @@ class MainController extends Controller
     {
     }
 
-    public function index() {
-
-        $job = new NodeJob();
-
-        dd(NodeJob::all()); die;
+    public function index()
+    {
 
         return view('index', [
-            'version' => '1.1'
+            'jobs' => NodeJob::all()
         ]);
     }
 }

@@ -34,7 +34,7 @@ class NodeJob
             $result[] = self::read(self::JOBS_ROOT . '/' . $entry);
         }
 
-        dd($result);
+        return $result;
     }
 
     public static function read($file)
