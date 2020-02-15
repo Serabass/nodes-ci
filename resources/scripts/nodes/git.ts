@@ -1,4 +1,4 @@
-import {LGraph, LGraphNode, LiteGraph, Vector2} from 'litegraph.js';
+import {LGraphNode, LiteGraph} from 'litegraph.js';
 import {LiteGraphNode} from '../decorators/LiteGraphNode.ts';
 
 @LiteGraphNode('CI/git')
