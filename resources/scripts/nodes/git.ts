@@ -1,4 +1,4 @@
-import {LGraphNode} from 'litegraph.js';
+import {LGraph, LGraphNode, LiteGraph, Vector2} from 'litegraph.js';
 import {LiteGraphNode} from '../decorators/LiteGraphNode.ts';
 
 @LiteGraphNode('CI/git')
@@ -10,9 +10,12 @@ export class GitNode extends LGraphNode {
 
     constructor() {
         super();
-        this.addInput("repo_url", "string");
+        this.addWidget('text', 'repo_url', 'https://github.com/Serabass/nodes-ci.git');
 
-        this.addOutput("complete","string");
+        this.addOutput("complete", LiteGraph.EVENT as any);
+
+        this.pos = [250, 220];
+        this.size = [350, 120];
     }
 }
 
